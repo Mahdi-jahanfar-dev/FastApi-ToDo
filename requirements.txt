@@ -4,6 +4,7 @@ anyio==4.9.0
 certifi==2025.7.14
 click==8.2.1
 dnspython==2.7.0
+dotenv==0.9.9
 email_validator==2.2.0
 fastapi==0.116.1
 fastapi-cli==0.0.8
