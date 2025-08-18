@@ -16,7 +16,7 @@ async def read_root(db: Session = Depends(get_db), user_id: int = Depends(get_au
 
 @router.post("/create/")
 async def task_create(task: TaskCreateSchema, db: Session = Depends(get_db), user_id: int = Depends(get_authenticated_user)):
-    new_task = Task(title = task.title)
+    new_task = Task(title = task.title, user_id = user_id)
     db.add(new_task)
     db.commit()
     db.refresh(new_task)

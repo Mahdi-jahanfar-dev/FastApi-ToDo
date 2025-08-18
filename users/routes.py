@@ -3,9 +3,9 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
 from .models import User, hash_password
 from db import get_db
-from .schemas import UserRegisterSchema, UserLoginSchema
+from .schemas import UserRegisterSchema, UserLoginSchema, RefreshTokenSchema
 from sqlalchemy.orm import Session
-from users.generate_jwt_token import jwt_access_token_generator, jwt_refresh_token_generator
+from users.generate_jwt_token import jwt_access_token_generator, jwt_refresh_token_generator, get_access_token
 
 
 router = APIRouter(prefix="/account", tags=["account"])
@@ -41,3 +41,8 @@ async def user_login(user: UserLoginSchema, db: Session = Depends(get_db)):
         },
         status_code=status.HTTP_200_OK
     )
+
+@router.post("/token/refresh")
+async def refresh_token_route(access_token: str = Depends(get_access_token)):
+    
+    return JSONResponse(content={"access token": access_token})
