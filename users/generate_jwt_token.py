@@ -38,13 +38,14 @@ def jwt_refresh_token_generator(user_id: int, count: int = 1):
     refresh_token = jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm="HS256")
     return refresh_token
 
-def get_authenticated_user(credential: HTTPAuthorizationCredentials = Depends(security)):
+def get_authenticated_user(credential: HTTPAuthorizationCredentials = Depends(security)) -> int:
     
     token = credential.credentials
     
     try:
         decoded_token = jwt.decode(token, settings.JWT_SECRET_KEY, algorithms=["HS256"])
-        return decoded_token
+        user_id = decoded_token["user_id"]
+        return user_id
     except InvalidTokenError:
         raise HTTPException(detail="invalid token", status_code=status.HTTP_401_UNAUTHORIZED)
     except ExpiredSignatureError:
