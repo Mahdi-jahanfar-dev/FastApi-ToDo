@@ -19,6 +19,8 @@ class User(Base):
     hashed_password = Column(String(200))
     created_at = Column(DateTime,)
     
+    tasks = relationship("Task", back_populates="user")
+    
     def verify_password(self, plain_password: str) -> bool:
         return pwd_context.verify(plain_password, self.hashed_password)
     
