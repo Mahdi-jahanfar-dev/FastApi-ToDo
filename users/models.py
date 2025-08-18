@@ -19,8 +19,8 @@ class User(Base):
     hashed_password = Column(String(200))
     created_at = Column(DateTime,)
     
-    def verify(plain_password: str, hashed_password: str = hashed_password) -> bool:
-        return pwd_context.verify(plain_password, hashed_password)
+    def verify_password(self, plain_password: str) -> bool:
+        return pwd_context.verify(plain_password, self.hashed_password)
     
     def __repr__(self):
         return self.username

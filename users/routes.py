@@ -1,9 +1,12 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from fastapi.responses import JSONResponse
+from fastapi.exceptions import HTTPException
 from .models import User, hash_password
 from db import get_db
-from .schemas import UserRegisterSchema
+from .schemas import UserRegisterSchema, UserLoginSchema
 from sqlalchemy.orm import Session
+from users.generate_jwt_token import jwt_access_token_generator, jwt_refresh_token_generator
+
 
 router = APIRouter(prefix="/account", tags=["account"])
 
@@ -21,3 +24,20 @@ async def user_register(user: UserRegisterSchema, db: Session = Depends(get_db))
 async def users_list(db: Session = Depends(get_db)):
     users = db.query(User).all()
     return users
+
+@router.post("/login/")
+async def user_login(user: UserLoginSchema, db: Session = Depends(get_db)):
+    
+    user_instance = db.query(User).filter_by(username = user.username).first()
+    if not user_instance or not user_instance.verify_password(user.password):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="username or password is wrong")
+    
+    access_token = jwt_access_token_generator(user_instance.id)
+    refresh_token = jwt_refresh_token_generator(user_instance.id)
+    
+    return JSONResponse(content={
+        "access token": access_token,
+        "refresh_token": refresh_token
+        },
+        status_code=status.HTTP_200_OK
+    )
