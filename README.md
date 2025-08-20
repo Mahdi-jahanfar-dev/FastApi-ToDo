@@ -31,8 +31,8 @@ A **simple ToDo application** built with **FastAPI**, featuring user management,
 |--------|---------|-------------|--------------|----------|
 | GET    | `/tasks/` | Get all tasks (JWT protected) | N/A | `[{"id": 1, "title": "string", "user_id": 1}]` |
 | POST   | `/tasks/create/` | Create a new task | `{ "title": "string" }` | `{ "message": "task: <title> created" }` |
-| PUT    | `/tasks/{task_id}/edit` | Edit a task (JWT protected) | `{ "title": "string" }` | `{ "message": "task updated" }` |
-| DELETE | `/tasks/{task_id}/delete` | Delete a task (JWT protected) | N/A | `{ "message": "task deleted" }` |
+| PUT    | `/tasks/edit/{task_id}/` | Edit a task (JWT protected) | `{ "title": "string" }` | `{ "message": "task updated" }` |
+| DELETE | `/tasks/del/{task_id}/` | Delete a task (JWT protected) | N/A | `{ "message": "task deleted" }` |
 
 ---
 
