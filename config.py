@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     SQLALCHEMY_DATABASE_URL: str
+    TESTS_DATABASE_URL: str
     JWT_SECRET_KEY: str
 
     class Config:
