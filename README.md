@@ -8,7 +8,8 @@ A **simple ToDo application** built with **FastAPI**, featuring user management,
 
 - 👤 **User Management**: Register and login users  
 - 📝 **Task Management**: Create, read, edit, and delete tasks  
-- 🔐 **JWT Authentication**: Protect user and task actions  
+- 🔐 **JWT Authentication**: Protect user and task actions
+- 🐋 **Dockerized**: Run with Dockerfile
 
 ---
 
@@ -53,12 +54,20 @@ A **simple ToDo application** built with **FastAPI**, featuring user management,
 ---
 
 ## ⚡ Installation & Run
-
 ```bash
 # Clone the repository
 git clone https://github.com/Mahdi-jahanfar-dev/FastApi-ToDo.git
 cd FastApi-ToDo
+```
 
+### Dockerfile
+```bash
+sudo docker build -t image_name .
+sudo docker run -d --name container_name -p 8000:8000 image_name
+```
+
+### In Local
+```bash
 # Create virtual environment
 python -m venv venv
 source venv/bin/activate  # Linux / Mac
@@ -69,3 +78,4 @@ pip install -r requirements.txt
 
 # Run the FastAPI server
 fastapi dev main.py
+```
