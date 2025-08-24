@@ -9,7 +9,7 @@ A **simple ToDo application** built with **FastAPI**, featuring user management,
 - 👤 **User Management**: Register and login users  
 - 📝 **Task Management**: Create, read, edit, and delete tasks  
 - 🔐 **JWT Authentication**: Protect user and task actions
-- 🐋 **Dockerized**: Run with Dockerfile
+- 🐋 **Dockerized**: Run with docker compose
 
 ---
 
@@ -60,10 +60,9 @@ git clone https://github.com/Mahdi-jahanfar-dev/FastApi-ToDo.git
 cd FastApi-ToDo
 ```
 
-### Dockerfile
+### docker compose
 ```bash
-sudo docker build -t image_name .
-sudo docker run -d --name container_name -p 8000:8000 image_name
+sudo docker-compose up -d --build
 ```
 
 ### In Local
