@@ -1,0 +1,14 @@
+services:
+
+
+  core:
+    container_name: core
+    build: .
+    ports:
+      - "8000:8000"
+    
+    volumes:
+      - .:/core
+    
+    # --reload : restarting project for every change
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
