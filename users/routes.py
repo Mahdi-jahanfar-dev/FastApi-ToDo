@@ -3,14 +3,15 @@ from fastapi.responses import JSONResponse, Response
 from fastapi.exceptions import HTTPException
 from .models import User, hash_password
 from db import get_db
-from .schemas import UserRegisterSchema, UserLoginSchema, RefreshTokenSchema
+from .schemas import UserRegisterSchema, UserLoginSchema, UserOut
 from sqlalchemy.orm import Session
 from users.generate_jwt_token import (
     jwt_access_token_generator,
     jwt_refresh_token_generator,
     get_access_token,
 )
-
+from fastapi_cache.decorator import cache
+from typing import List
 
 
 router = APIRouter(prefix="/account", tags=["account"])
@@ -30,10 +31,12 @@ async def user_register(user: UserRegisterSchema, db: Session = Depends(get_db))
     )
 
 
-@router.get("/users/list")
-async def users_list(db: Session = Depends(get_db)):
+# if we have async def or Jsonresponse cache not work
+@router.get("/users/list", response_model=List[UserOut])
+@cache(expire=120)
+def users_list(db: Session = Depends(get_db)):
     users = db.query(User).all()
-    return Response(content=f"users list: {users}", status_code=status.HTTP_200_OK)
+    return users
 
 
 @router.post("/login/")
