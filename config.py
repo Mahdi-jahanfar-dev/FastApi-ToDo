@@ -2,9 +2,13 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    SQLALCHEMY_DATABASE_URL: str
     TESTS_DATABASE_URL: str
     JWT_SECRET_KEY: str
+    POSTGRES_USER: str
+    POSTGRES_DB: str
+    POSTGRES_HOST: str
+    POSTGRES_PASSWORD: str
+    POSTGRES_PORT: str
 
     class Config:
         env_file = ".env"

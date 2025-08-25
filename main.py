@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from config import settings
-from db import get_db
+from db import get_db, Base, engine
 from sqlalchemy.orm import Session
 from fastapi import Depends
 from tasks.models import Task  # Assuming you have a Task model defined in tasks.py
