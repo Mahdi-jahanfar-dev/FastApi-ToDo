@@ -12,6 +12,7 @@ from users.generate_jwt_token import (
 )
 
 
+
 router = APIRouter(prefix="/account", tags=["account"])
 
 
@@ -57,4 +58,6 @@ async def user_login(user: UserLoginSchema, db: Session = Depends(get_db)):
 @router.post("/token/refresh")
 async def refresh_token_route(access_token: str = Depends(get_access_token)):
 
-    return JSONResponse(content={"access token": access_token}, status_code=status.HTTP_201_CREATED)
+    return JSONResponse(
+        content={"access token": access_token}, status_code=status.HTTP_201_CREATED
+    )

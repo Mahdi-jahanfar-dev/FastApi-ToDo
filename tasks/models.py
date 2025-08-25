@@ -13,3 +13,4 @@ class Task(Base):
     )
     created_at = Column(DateTime, default=func.now())
     user = relationship("User", back_populates="tasks")
+    test_field = Column(String, nullable=True)
