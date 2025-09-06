@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship, backref
 from db import Base
 
 
+# task model
 class Task(Base):
     __tablename__ = "tasks"
 

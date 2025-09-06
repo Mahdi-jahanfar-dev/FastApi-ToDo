@@ -11,7 +11,7 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 import redis.asyncio as ioredis
 
-
+# lifespan event handler
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("application startup")
@@ -22,9 +22,10 @@ async def lifespan(app: FastAPI):
     yield
     print("application shutdown")
 
-
+# fastapi instance
 app = FastAPI(title="task manager app", lifespan=lifespan)
 
 
+# apps include routers
 app.include_router(tasks_router)
 app.include_router(users_router)
