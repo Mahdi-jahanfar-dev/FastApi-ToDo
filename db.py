@@ -15,6 +15,7 @@ Base = declarative_base()
 Session = SessionLocal()
 
 
+# db instance
 def get_db():
     db = SessionLocal()
     try:

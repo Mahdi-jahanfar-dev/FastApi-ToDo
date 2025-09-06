@@ -6,6 +6,7 @@ from sqlalchemy.pool import StaticPool
 from main import app
 
 
+# overrided db for tests
 @fixture(scope="module")
 def override_db_engine():
 
@@ -20,6 +21,7 @@ def override_db_engine():
     return engine
 
 
+# client instance of overrided test client app with overrided db
 @fixture(scope="module")
 def client_instance(override_db_engine):
 

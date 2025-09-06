@@ -1,6 +1,7 @@
 access_token = None
 
 
+# test for user registration
 def test_user_register(client_instance):
 
     response = client_instance.post(
@@ -19,6 +20,7 @@ def test_user_register(client_instance):
     print(data)
 
 
+# test for user list route
 def test_users_list(client_instance):
 
     response = client_instance.get("/account/users/list")
@@ -26,6 +28,7 @@ def test_users_list(client_instance):
     assert response.status_code == 200
 
 
+# test for user login route with ok status
 def test_user_login_ok(client_instance):
 
     response = client_instance.post(
@@ -38,6 +41,7 @@ def test_user_login_ok(client_instance):
     assert response.status_code == 200
 
 
+# test for user login route with 401 status
 def test_user_login_username_faild(client_instance):
 
     response = client_instance.post(
@@ -47,6 +51,7 @@ def test_user_login_username_faild(client_instance):
     assert response.status_code == 401
 
 
+# test user login with wrong password
 def test_user_login_password_faild(client_instance):
 
     response = client_instance.post(
@@ -56,6 +61,7 @@ def test_user_login_password_faild(client_instance):
     assert response.status_code == 401
 
 
+# function for get access token with refresh token route
 def test_get_access_token_ok(client_instance):
 
     response = client_instance.post(
@@ -65,6 +71,7 @@ def test_get_access_token_ok(client_instance):
     response.status_code == 201
 
 
+# function for access token faild route
 def test_get_access_token_faild(client_instance):
 
     response = client_instance.post(
