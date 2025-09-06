@@ -6,11 +6,12 @@ from passlib.context import CryptContext  # برای هش و بررسی رمز �
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-
+# function for hashing passwords
 def hash_password(plain_password: str) -> str:
     return pwd_context.hash(plain_password)
 
 
+# user model
 class User(Base):
     __tablename__ = "users"
 
