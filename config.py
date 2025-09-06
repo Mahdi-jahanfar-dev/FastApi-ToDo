@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings
 
 
+# env settings for project
 class Settings(BaseSettings):
     TESTS_DATABASE_URL: str
     JWT_SECRET_KEY: str
@@ -15,4 +16,5 @@ class Settings(BaseSettings):
         env_file_encoding = "utf-8"
 
 
+# project settings instance
 settings = Settings()

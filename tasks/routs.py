@@ -11,6 +11,7 @@ from users.generate_jwt_token import get_authenticated_user
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
 
+# all user tasks route
 @router.get("/")
 async def read_root(
     db: Session = Depends(get_db), user_id: int = Depends(get_authenticated_user)
@@ -18,6 +19,7 @@ async def read_root(
     return db.query(Task).filter_by(user_id=user_id).all()
 
 
+# creating task route
 @router.post("/create/")
 async def task_create(
     task: TaskCreateSchema,
@@ -34,6 +36,7 @@ async def task_create(
     )
 
 
+# edite task route
 @router.put("/{task_id}")
 async def task_update(
     task_id: int,
@@ -54,6 +57,7 @@ async def task_update(
     )
 
 
+# delete task route
 @router.delete("/del/{task_id}")
 async def task_delete(
     task_id: int,

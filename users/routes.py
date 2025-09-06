@@ -16,7 +16,7 @@ from typing import List
 
 router = APIRouter(prefix="/account", tags=["account"])
 
-
+# registrations route
 @router.post("/register")
 async def user_register(user: UserRegisterSchema, db: Session = Depends(get_db)):
     user_data = user.model_dump(exclude={"password"})
@@ -39,6 +39,7 @@ def users_list(db: Session = Depends(get_db)):
     return users
 
 
+# login route
 @router.post("/login/")
 async def user_login(user: UserLoginSchema, db: Session = Depends(get_db)):
 
@@ -58,6 +59,7 @@ async def user_login(user: UserLoginSchema, db: Session = Depends(get_db)):
     )
 
 
+# getting access token with refresh token route
 @router.post("/token/refresh")
 async def refresh_token_route(access_token: str = Depends(get_access_token)):
 

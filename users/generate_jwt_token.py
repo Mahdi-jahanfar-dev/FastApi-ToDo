@@ -8,7 +8,7 @@ from fastapi import Depends, status
 
 security = HTTPBearer()
 
-
+# function for generate access token
 def jwt_access_token_generator(user_id: int, count: int = 30):
 
     now = datetime.now(timezone.utc)
@@ -24,6 +24,7 @@ def jwt_access_token_generator(user_id: int, count: int = 30):
     return access_token
 
 
+# function for generate refresh token
 def jwt_refresh_token_generator(user_id: int, count: int = 1):
 
     now = datetime.now(timezone.utc)
@@ -39,6 +40,7 @@ def jwt_refresh_token_generator(user_id: int, count: int = 1):
     return refresh_token
 
 
+# function for check user is authenticated or not
 def get_authenticated_user(
     credential: HTTPAuthorizationCredentials = Depends(security),
 ) -> int:
@@ -74,6 +76,7 @@ def get_authenticated_user(
         )
 
 
+# function for get access token with refresh token
 def get_access_token(
     credential: HTTPAuthorizationCredentials = Depends(security),
 ) -> str:
