@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str
     POSTGRES_PASSWORD: str
     POSTGRES_PORT: str
+    AI_SECRET_KEY: str
 
     class Config:
         env_file = ".env"

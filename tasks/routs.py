@@ -4,8 +4,9 @@ from fastapi.exceptions import HTTPException
 from db import get_db
 from .models import Task
 from sqlalchemy.orm import Session
-from .schemas import TaskCreateSchema
+from .schemas import TaskCreateSchema, OpenAiMessageSchema
 from users.generate_jwt_token import get_authenticated_user
+from ..open_ai_config import chat_gpt
 
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
@@ -75,3 +76,13 @@ async def task_delete(
     return JSONResponse(
         content={"message": "task deleted successfully"}, status_code=status.HTTP_200_OK
     )
+
+
+@router.post("chat/ai")
+async def chat_gpt_route(data: OpenAiMessageSchema, user_id: int = Depends(get_authenticated_user)):
+    
+    message = data.message
+    
+    response = chat_gpt(message)
+    
+    return response
