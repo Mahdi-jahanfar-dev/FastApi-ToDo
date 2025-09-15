@@ -9,6 +9,7 @@ A **simple ToDo application** built with **FastAPI**, featuring user management,
 - 👤 **User Management**: Register and login users  
 - 📝 **Task Management**: Create, read, edit, and delete tasks  
 - 🔐 **JWT Authentication**: Protect user and task actions
+- 🤖 **AI Chat**: Chat with OpenAI-powered assistant
 - 🐋 **Dockerized**: Run with docker compose
 
 ---
@@ -34,7 +35,16 @@ A **simple ToDo application** built with **FastAPI**, featuring user management,
 | POST   | `/tasks/create/` | Create a new task | `{ "title": "string" }` | `{ "message": "task: <title> created" }` |
 | PUT    | `/tasks/edit/{task_id}/` | Edit a task (JWT protected) | `{ "title": "string" }` | `{ "message": "task updated" }` |
 | DELETE | `/tasks/del/{task_id}/` | Delete a task (JWT protected) | N/A | `{ "message": "task deleted" }` |
+| POST   | `tasks/chat/ai` | Send a message and get AI response | `{ "message": "Hello AI" }` | `{ "response": "AI reply here..." }` |
 
+---
+
+⚠️ **Note**: To use the AI Chat feature, you need an **OpenAI API Key**.  
+Create a `.env` file in the project root and add:  
+
+```env
+AI_SECRET_KEY=your_api_key_here
+```
 ---
 
 ## 🔑 Authentication
