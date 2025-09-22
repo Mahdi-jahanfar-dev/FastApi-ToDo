@@ -17,7 +17,6 @@ def test_user_register(client_instance):
     data = response.json()
 
     assert response.status_code == 201
-    print(data)
 
 
 # test for user list route
@@ -68,7 +67,7 @@ def test_get_access_token_ok(client_instance):
         "/account/token/refresh", json={"refresh_token": access_token}
     )
 
-    response.status_code == 201
+    assert response.status_code == 201
 
 
 # function for access token faild route
@@ -78,4 +77,4 @@ def test_get_access_token_faild(client_instance):
         "account/token/refresh", json={"refresh_token": "1234"}
     )
 
-    response.status_code == 401
+    assert response.status_code == 401
